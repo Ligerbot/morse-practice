@@ -2,6 +2,8 @@
 from playsound import playsound
 import pymorsecode.pymorsecode
 import ollama
+print("Morse code chatbot for practicing morse code")
+print("(Ignore any alsa related warnings below, they are unimportant as long as you have a working speaker")
 conversation = []
 conversation.append({"role": "system", "content": "You are a morse code practice bot. Your callsign is KO6BOT. All answers must be short answers in ENGLISH. The user will send you dots and dashes. Decode those yourself and then reply with a short text sentence NOT IN MORSE CODE. Only use common characters, no periods or commands, etc. Your replies must be short and concise, using only common words. Do not use common ham radio morse code terms like QSL unless the user sends them to you. It CANNOT BE RANDOM CHARACTERS. REPLY WITH WORDS. NO ABBREVIATIONS. Do not ever use dashes or emojis. You don't need to echo what the user says. Instead, try to have a conversation with the user. You are only allowed to answer in lowercase letters. No punctuation marks of any kind. No apostrophes either"})
 cheatsheet = [
