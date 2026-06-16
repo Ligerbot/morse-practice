@@ -11,7 +11,7 @@ if autoid:
 	morse.play_morse()
 else:
 	wpm = input("WPM (5-25): ")
-morse = pymorsecode.pymorsecode.MorseCode(callsign, wpm=int(wpm))
+	morse = pymorsecode.pymorsecode.MorseCode("a", wpm=int(wpm))
 while True:
 	text = input("> ")
 	morse.save_wav("tmp.wav", text)
