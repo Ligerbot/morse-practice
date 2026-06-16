@@ -2,6 +2,8 @@
 
 Choose two different modes, one where you type dashes and dots and the program converts them, or one where you hold or tap space bar for variable length dashes and dots (second one not added yet).
 
+Or you could chat with a large language model over morse code if you run botpractice.py
+
 `python3 beeper.py` runs the converter from dots and dashes to sound.
 
 playsound is required, otherwise on Linux you might hear weird screeching.
