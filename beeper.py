@@ -19,8 +19,8 @@ else:
 while True:
 	text = input("> ")
 	if slashseperation:
-		text.replace("/", "  ")
+		text = text.replace("/", "  ")
 	if extraspacing and not slashseperation:
-		text.replace(" ", "  ")
+		text = text.replace(" ", "  ")
 	morse.save_wav("tmp.wav", text)
 	playsound("tmp.wav")
