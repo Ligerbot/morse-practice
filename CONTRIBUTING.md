@@ -12,6 +12,7 @@ There are only two guidelines really. The first is that you should use tabs inst
 2. `git add .`
 3. `git commit -m "(a short summary of what you did)"`
 4. `git pull`
+
 4a. If step 4 says something about there being work on the repo that you don't have, run `git rebase`
 5. `git push`
 It should give a link to a pull request where you should put a detailed summary of what you changed. If the PR is good, it should be merged quickly.
