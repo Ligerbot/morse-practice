@@ -15,7 +15,7 @@ if autoid:
 	morse.play_morse()
 else:
 	wpm = input("WPM (5-25): ")
-	morse = pymorsecode.pymorsecode.MorseCode("a", wpm=int(wpm))
+	morse = pymorsecode.pymorsecode.MorseCode("a", wpm=float(wpm))
 while True:
 	text = input("> ")
 	if slashseperation:
