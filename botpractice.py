@@ -10,7 +10,7 @@ playownmessage = False #if set to true it beeps your message first
 print("Morse code chatbot for practicing morse code")
 print("(Ignore any alsa related warnings below, they are unimportant as long as you have a working speaker")
 conversation = []
-conversation.append({"role": "system", "content": "You are a morse code practice bot. Your callsign is KO6BOT. All answers must be short answers in ENGLISH. The user will send you TEXT. Reply with a short text sentence NOT IN MORSE CODE. Only use common characters, no periods or commands, etc. Your replies must be short and concise, using only common words. You are encouraged to use common ham radio morse code terms like QSL, especialy if the user sends them to you. It CANNOT BE RANDOM CHARACTERS. REPLY WITH WORDS. NO ABBREVIATIONS. Do not ever use dashes or emojis. You don't need to echo what the user says. You are only allowed to answer in lowercase letters. No punctuation marks of any kind. No apostrophes either. No double quotes or single quotes are ever allowed. Avoid sending messages more than a 3 words long if possible."})
+conversation.append({"role": "system", "content": "All answers must be short answers in ENGLISH. The user will send you TEXT. Reply with a short text sentence. Only use common characters, no periods or commands, etc. Your replies must be short and concise, using only common words. You are encouraged to use common ham radio morse code terms like QSL, especialy if the user sends them to you. It CANNOT BE RANDOM CHARACTERS. REPLY WITH WORDS. NO ABBREVIATIONS. Do not ever use dashes or emojis. You don't need to echo what the user says. You are only allowed to answer in lowercase letters. No punctuation marks of any kind. No apostrophes either. No double quotes or single quotes are ever allowed. Avoid sending messages more than a 5 words long if possible."})
 #conversation.append({"role": "system", "content": "Here are the following Q codes for ham rado you can use: QRA = What is the name of your station: QRB = How far are you away from my station QRG = What is my exact frequency QRK = What is the intelligibility of my signals QRL = Are you busy QRM = Man Made Interference QRN = Natural interference e.g lightning QRO = Should I increase transmitting power? QRP = Should I decrease transmitting power? QRQ = Should I send faster? QRS = Should I send slower? QRT = Should I stop transmitting? QRV = Are you ready? QSL = I confirm that I recieved that"})
 cheatsheet = [
 "a = .-",
@@ -71,7 +71,7 @@ cheatsheet = [
 conversation.append({"role": "system", "content": "Morse code cheatsheet: " + str(cheatsheet)})
 
 def llamaHandler(text):
-	print("Decoded: " + text)
+#	print("Decoded: " + text)
 	global conversation
 	client = ollama.Client()
 	conversation.append({"role": "user", "content": text})
@@ -81,7 +81,7 @@ def llamaHandler(text):
 	)
 	output = response['message']['content'].replace("'", " ")
 	conversation.append({"role": "assistant", "content": output})
-	print("Output of llm: " + output)
+#	print("Output of llm: " + output)
 	return output
 
 wpm = input("WPM (5-25): ")
@@ -113,8 +113,9 @@ while True:
 			if playownmessage:
 				playsound("tmp.wav")
 			print("Chatbot replying...")
-			output = llamaHandler(text.morse_text)
-			print(output)
+			morse.sound_to_morse("tmp.wav")
+			output = llamaHandler(morse.morse_text)
+#			print(output)
 			morse = pymorsecode.pymorsecode.MorseCode(output, wpm=int(wpm))
 			morse.save_wav("tmp.wav")
 			playsound("tmp.wav")
