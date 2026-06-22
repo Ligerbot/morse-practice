@@ -5,12 +5,12 @@ from playsound import playsound
 import pymorsecode.pymorsecode
 import ollama
 
-playownmessage = False #if set to true it beeps your message first
+playownmessage = True #if set to true it beeps your message first
 
 print("Morse code chatbot for practicing morse code")
 print("(Ignore any alsa related warnings below, they are unimportant as long as you have a working speaker")
 conversation = []
-conversation.append({"role": "system", "content": "All answers must be short answers in ENGLISH. The user will send you TEXT. Reply with a short text sentence. Only use common characters, no periods or commands, etc. Your replies must be short and concise, using only common words. You are encouraged to use common ham radio morse code terms like QSL, especialy if the user sends them to you. It CANNOT BE RANDOM CHARACTERS. REPLY WITH WORDS. NO ABBREVIATIONS. Do not ever use dashes or emojis. You don't need to echo what the user says. You are only allowed to answer in lowercase letters. No punctuation marks of any kind. No apostrophes either. No double quotes or single quotes are ever allowed. Avoid sending messages more than a 5 words long if possible."})
+conversation.append({"role": "system", "content": "You are a ham radio person who does morse code. Your callsign is abcd. All answers must be short answers in ENGLISH. The user will send you TEXT. Reply with a short text sentence. Only use common characters, no periods or commands, etc. Your replies must be short and concise, using only common words. You are encouraged to use common ham radio morse code terms like QSL, especialy if the user sends them to you. It CANNOT BE RANDOM CHARACTERS. REPLY WITH WORDS. NO ABBREVIATIONS. Do not ever use dashes or emojis. You don't need to echo what the user says. You are only allowed to answer in lowercase letters. No punctuation marks of any kind. No apostrophes either. No double quotes or single quotes are ever allowed. Avoid sending messages more than 3 words long if possible."})
 #conversation.append({"role": "system", "content": "Here are the following Q codes for ham rado you can use: QRA = What is the name of your station: QRB = How far are you away from my station QRG = What is my exact frequency QRK = What is the intelligibility of my signals QRL = Are you busy QRM = Man Made Interference QRN = Natural interference e.g lightning QRO = Should I increase transmitting power? QRP = Should I decrease transmitting power? QRQ = Should I send faster? QRS = Should I send slower? QRT = Should I stop transmitting? QRV = Are you ready? QSL = I confirm that I recieved that"})
 cheatsheet = [
 "a = .-",
@@ -51,21 +51,7 @@ cheatsheet = [
 "0 = -----",
 ". = .-.-.-",
 ", = --..--",
-"? = ..--..",
-"QRA = What is the name of your station",
-"QRB = How far are you away from my station",
-"QRG = What is my exact frequency",
-"QRK = What is the intelligibility of my signals",
-"QRL = Are you busy",
-"QRM = Man Made Interference",
-"QRN = Natural interference e.g lightning",
-"QRO = Should I increase transmitting power?",
-"QRP = Should I decrease transmitting power?",
-"QRQ = Should I send faster?",
-"QRS = Should I send slower?",
-"QRT = Should I stop transmitting?",
-"QRV = Are you ready? ",
-"QSL = I confirm that I recieved that"
+"? = ..--.."
 ]
 
 conversation.append({"role": "system", "content": "Morse code cheatsheet: " + str(cheatsheet)})
@@ -79,7 +65,7 @@ def llamaHandler(text):
 		model="llama3:latest",
 		messages=conversation
 	)
-	output = response['message']['content'].replace("'", " ")
+	output = response['message']['content'].replace(" ", "   ").replace("'", "")
 	conversation.append({"role": "assistant", "content": output})
 #	print("Output of llm: " + output)
 	return output
